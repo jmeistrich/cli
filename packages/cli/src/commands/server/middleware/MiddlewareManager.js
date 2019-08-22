@@ -21,7 +21,6 @@ import getSecurityHeadersMiddleware from './getSecurityHeadersMiddleware';
 import loadRawBodyMiddleware from './loadRawBodyMiddleware';
 import openStackFrameInEditorMiddleware from './openStackFrameInEditorMiddleware';
 import openURLMiddleware from './openURLMiddleware';
-import logToConsoleMiddleware from './logToConsoleMiddleware';
 import statusPageMiddleware from './statusPageMiddleware';
 import systraceProfileMiddleware from './systraceProfileMiddleware';
 import getDevToolsMiddleware from './getDevToolsMiddleware';
@@ -33,7 +32,7 @@ type Options = {
 
 type WebSocketProxy = {
   server: WebSocketServer,
-  isChromeConnected: () => boolean,
+  isDebuggerConnected: () => boolean,
 };
 
 type Connect = $Call<connect>;
@@ -54,7 +53,6 @@ export default class MiddlewareManager {
       .use('/debugger-ui', serveStatic(debuggerUIFolder))
       .use(openStackFrameInEditorMiddleware(this.options))
       .use(openURLMiddleware)
-      .use(logToConsoleMiddleware)
       .use(copyToClipBoardMiddleware)
       .use(statusPageMiddleware)
       .use(systraceProfileMiddleware)
@@ -72,7 +70,7 @@ export default class MiddlewareManager {
 
   attachDevToolsSocket(socket: WebSocketProxy) {
     this.app.use(
-      getDevToolsMiddleware(this.options, () => socket.isChromeConnected()),
+      getDevToolsMiddleware(this.options, () => socket.isDebuggerConnected()),
     );
   }
 }

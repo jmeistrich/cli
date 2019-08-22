@@ -6,7 +6,7 @@
  *
  */
 
-import path from 'path';
+import {posix as path} from 'path';
 import {last, union} from 'lodash';
 
 /**
@@ -55,8 +55,8 @@ export default function getHeaderSearchPath(
   const directories = union(headers.map(path.dirname));
 
   return directories.length === 1
-    ? `"$(SRCROOT)${path.sep}${path.relative(sourceDir, directories[0])}"`
-    : `"$(SRCROOT)${path.sep}${path.relative(
+    ? `"$(SRCROOT)/${path.relative(sourceDir, directories[0])}"`
+    : `"$(SRCROOT)/${path.relative(
         sourceDir,
         getOuterDirectory(directories),
       )}/**"`;

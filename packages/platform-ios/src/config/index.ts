@@ -63,6 +63,7 @@ export function projectConfig(folder: string, userConfig: IOSProjectParams) {
     libraryFolder: userConfig.libraryFolder || 'Libraries',
     sharedLibraries: mapSharedLibaries(userConfig.sharedLibraries || []),
     plist: userConfig.plist || [],
+    scriptPhases: userConfig.scriptPhases || [],
   };
 }
 

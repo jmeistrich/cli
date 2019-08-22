@@ -34,10 +34,10 @@ const reactLogoArray = [
 const welcomeMessage =
   '                  Welcome to React Native!                ';
 const learnOnceMessage =
-  '                 Learn Once Write Anywhere                ';
+  '                 Learn once, write anywhere               ';
 
 export default `${chalk.blue(reactLogoArray.join('\n'))}
 
-${chalk.yellow.bold(welcomeMessage)}
-${chalk.gray(learnOnceMessage)}
+${chalk.blue.bold(welcomeMessage)}
+${chalk.dim(learnOnceMessage)}
 `;
